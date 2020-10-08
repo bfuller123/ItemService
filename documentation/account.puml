@@ -1,0 +1,31 @@
+@startuml
+
+object account {
+    id: serial PK
+    username: varchar(40) UNIQUE NOT NULL
+    email: varchar(255) UNIQUE NOT NULL
+    firstName: varchar(50) NULL
+    lastName: varchar(50) NULL
+    active: bool NOT NULL DEFAULT true
+    createdAt: date NOT NULL
+    updatedAt: date NOT NULL
+}
+
+object friend {
+    id: serial PK
+    email: varchar(255) UNIQUE NOT NULL
+    createdAt: date NOT NULL
+    updatedAt: date NOT NULL
+}
+
+object account_friend_map {
+    id: serial PK
+    accountId: int NOT NULL
+    friendId: int NOT NULL
+    canView: bool NOT NULL DEFAULT true
+    viewUntil: date NULL
+    createdAt: date NOT NULL
+    updatedAt: date NOT NULL
+}
+
+@enduml

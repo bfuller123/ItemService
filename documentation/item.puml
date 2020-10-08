@@ -1,0 +1,36 @@
+@startuml
+
+object item {
+    id: serial PK
+    name: varchar(100) NOT NULL
+    cost: int null
+    link: varchar(255) null
+    accountId: int NOT NULL
+    active: boolean NOT NULL DEFAULT true
+    purchased: boolean NOT NULL DEFAULT false
+    createdAt: date NOT NULL
+    updatedAt: date NOT NULL
+}
+
+object category {
+    id: serial PK
+    description: varChar(50) NOT NULL
+}
+
+object item_category_map {
+    id: serial PK
+    itemId: int FK NOT NULL
+    categoryId: int FK NOT NULL
+}
+
+object item_rating {
+    id: serial PK
+    itemId: int FK NOT NULL
+    weekOneRating: smallint NULL (out of 10)
+    weekTwoRating: smallint NULL (out of 10)
+    weekFourRating: smallint NULL (out of 10)
+    weekEightRating: smallint NULL (out of 10)
+    weekSixteenRating: smallint NULL (out of 10)
+}
+
+@enduml
