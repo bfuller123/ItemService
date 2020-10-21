@@ -1,10 +1,12 @@
+import Knex from 'knex';
+
 // access environment variables
 let setupSchema;
 import dotenv from 'dotenv';
 dotenv.config();
 
 const getDBConnection = async (setupTestDB: boolean = false) => {
-    const db = require('knex')({
+    const db = Knex({
         client: 'pg',
         connection: process.env.CONNECTION_STRING
     });

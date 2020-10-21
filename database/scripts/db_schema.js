@@ -76,5 +76,5 @@ module.exports = async (knexConnection) => {
             FOREIGN KEY (itemId)
                 REFERENCES item (id)
         )
-    `)
+    `);
 };

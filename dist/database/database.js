@@ -12,15 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const knex_1 = __importDefault(require("knex"));
 // access environment variables
+let setupSchema;
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const getDBConnection = () => __awaiter(void 0, void 0, void 0, function* () {
-    const db = require('knex')({
+const getDBConnection = (setupTestDB = false) => __awaiter(void 0, void 0, void 0, function* () {
+    const db = knex_1.default({
         client: 'pg',
         connection: process.env.CONNECTION_STRING
     });
-    const setupSchema = require(`./scripts/db_schema`);
+    if (setupTestDB) {
+        setupSchema = require('./scripts/test_db_schema');
+    }
+    else {
+        setupSchema = require(`./scripts/db_schema`);
+    }
     yield setupSchema(db);
     return db;
 });
